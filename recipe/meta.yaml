@@ -5,8 +5,8 @@
 {% set x4_plugin = name + '_v' + version + "_x4" %}
 
 {% set sha256 = "782e2e79d340eed23282f77dec0212d1a596c0045a1db5852d7935ffe7855d74" %}
-{% set sha256_win32 = "06d97aee10371c938176849bb518eaea003d73a97b64ed2fd4fb58b4ccf30b0d" %}
-{% set sha256_win64 = "8601cd17cd86f38aaad5c7e43a8103955613b3a0066676e467004265fa65a611" %}
+{% set sha256_win32 = "b86a7947a98c57c679150c6e6b33d415cba7b0efc944474d3c20f68ef99b0719" %}
+{% set sha256_win64 = "9e99c1eee0f047a35ff7b7c65b50a85c9c925db070b2050932afc4931760fef5" %}
 
 package:
   name: {{ name|lower }}
@@ -46,7 +46,7 @@ about:
   license: MPL 2.0
   summary: The Terraform {{ provider }} provider
   doc_url: https://www.terraform.io/docs/providers/{{ provider|lower }}/index.html
-  dev_url: https://https://github.com/terraform-providers/{{ name }}
+  dev_url: https://github.com/terraform-providers/{{ name }}
 
 extra:
   recipe-maintainers:

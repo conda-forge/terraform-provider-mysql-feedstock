@@ -1,11 +1,10 @@
-{% set provider= "MySQL" %}
+{% set provider = "MySQL" %}
 {% set version = "1.1.0" %}
 
 {% set name = "terraform-provider-" + provider.lower() %}
 {% set x4_plugin = name + '_v' + version + "_x4" %}
 
 {% set sha256 = "782e2e79d340eed23282f77dec0212d1a596c0045a1db5852d7935ffe7855d74" %}
-{% set sha256_win32 = "b86a7947a98c57c679150c6e6b33d415cba7b0efc944474d3c20f68ef99b0719" %}
 {% set sha256_win64 = "9e99c1eee0f047a35ff7b7c65b50a85c9c925db070b2050932afc4931760fef5" %}
 
 package:
@@ -13,26 +12,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/terraform-providers/{{ name }}/archive/v{{ version }}.tar.gz  # [not win]
-  fn: {{ name }}-{{ version }}.tar.gz  # [not win]
-  sha256: {{ sha256 }}  # [not win]
+  - folder: src/github.com/terraform-providers/{{ name|lower }}
+    url: https://github.com/terraform-providers/{{ name }}/archive/v{{ version }}.tar.gz  # [not win]
+    sha256: {{ sha256 }}  # [not win]
 
-  url: https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_windows_386.zip  # [win32]
-  url: https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_windows_amd64.zip  # [win64]
-  fn: {{ name }}-{{ version }}.zip  # [win]
-  sha256: {{ sha256_win32 }}  # [win32]
-  sha256: {{ sha256_win64 }}  # [win64]
+    url: https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_windows_amd64.zip  # [win64]
+    sha256: {{ sha256_win64 }}  # [win64]
 
 build:
-  number: 0
+  number: 1
   script:
-    - XCOPY {{ x4_plugin }}.exe %LIBRARY_BIN%  # [win]
+    - XCOPY src\github.com\terraform-providers\{{ name|lower }}\{{ x4_plugin }}.exe %LIBRARY_BIN%  # [win]
 
 requirements:
   build:
-    - go 1.9.*  # [not win]
+    - {{ compiler('go') }}  # [not win]
     - make  # [not win]
-    - toolchain  # [not win]
   run:
     - terraform >=0.10
 

@@ -1,10 +1,10 @@
 {% set provider = "MySQL" %}
-{% set version = "1.1.0" %}
+{% set version = "1.5.0" %}
 
 {% set name = "terraform-provider-" + provider.lower() %}
 {% set x4_plugin = name + '_v' + version + "_x4" %}
 
-{% set sha256 = "782e2e79d340eed23282f77dec0212d1a596c0045a1db5852d7935ffe7855d74" %}
+{% set sha256 = "548658e2912cb8396b23dc37ebab07e342883ff6e23e5e744cdbd8613b874d20" %}
 {% set sha256_win64 = "9e99c1eee0f047a35ff7b7c65b50a85c9c925db070b2050932afc4931760fef5" %}
 
 package:
@@ -20,7 +20,7 @@ source:
     sha256: {{ sha256_win64 }}  # [win64]
 
 build:
-  number: 1001
+  number: 1000
   script:
     - XCOPY src\github.com\terraform-providers\{{ name|lower }}\{{ x4_plugin }}.exe %LIBRARY_BIN%  # [win]
 

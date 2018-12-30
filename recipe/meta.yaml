@@ -15,7 +15,6 @@ source:
   - folder: {{ pkg_src }}
     git_url: https://{{ goname }}
     git_rev: v{{ version }}
-    git_depth: 1
 
 
 build:

@@ -1,33 +1,32 @@
 {% set provider = "MySQL" %}
+{% set goname = "github.com/terraform-providers/terraform-provider-"+provider.lower() %}
 {% set version = "1.5.0" %}
 
-{% set name = "terraform-provider-" + provider.lower() %}
-{% set x4_plugin = name + '_v' + version + "_x4" %}
+{% set name = goname.split('/')[-1] %}
+{% set pkg_src = ('src/'+goname).replace("/",os.sep) %}
 
-{% set sha256 = "548658e2912cb8396b23dc37ebab07e342883ff6e23e5e744cdbd8613b874d20" %}
-{% set sha256_win64 = "9e99c1eee0f047a35ff7b7c65b50a85c9c925db070b2050932afc4931760fef5" %}
+{% set x4_plugin = name + '_v' + version + "_x4" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - folder: src/github.com/terraform-providers/{{ name|lower }}
-    url: https://github.com/terraform-providers/{{ name }}/archive/v{{ version }}.tar.gz  # [not win]
-    sha256: {{ sha256 }}  # [not win]
+  - folder: {{ pkg_src }}
+    git_url: https://{{ goname }}
+    git_rev: v{{ version }}
 
-    url: https://releases.hashicorp.com/{{ name }}/{{ version }}/{{ name }}_{{ version }}_windows_amd64.zip  # [win64]
-    sha256: {{ sha256_win64 }}  # [win64]
 
 build:
   number: 1000
   script:
-    - XCOPY src\github.com\terraform-providers\{{ name|lower }}\{{ x4_plugin }}.exe %LIBRARY_BIN%  # [win]
+    - pushd {{ pkg_src }}
+    - go build -v -o $GOBIN/{{ x4_plugin }} .  # [unix]
+    - go build -v -o %GOBIN%\{{ x4_plugin }} .  # [win]
 
 requirements:
   build:
     - {{ compiler('go') }}  # [not win]
-    - make  # [not win]
   run:
     - terraform >=0.10
 

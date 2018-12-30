@@ -32,8 +32,8 @@ requirements:
 
 test:
   requires:
-    - m2-grep
-    - m2-coreutils
+    - m2-grep       # [win]
+    - m2-coreutils  # [win]
   commands:
     - echo 'provider "{{ provider|lower }}" { version="{{ version }}" }' > init.tf
     - test $(terraform init | grep -c 'Downloading') = 0

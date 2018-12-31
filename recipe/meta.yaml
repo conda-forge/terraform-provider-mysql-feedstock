@@ -36,9 +36,10 @@ test:
     - m2-grep       # [win]
     - m2-coreutils  # [win]
   commands:
-    - bash -c "echo 'provider \"{{ provider|lower }}\" { version=\"{{ version }}\" }' > init.tf"
+    - bash -euf -c "echo 'provider \"{{ provider|lower }}\" { version=\"{{ version }}\" }' > init.tf"
     - terraform init > init.out
-    - bash -c "test $(grep -c Downloading init.out) = 0"
+    - cat init.out
+    - bash -euf -c "test $(grep -c Downloading init.out) = 0"
 
 about:
   home: https://www.terraform.io

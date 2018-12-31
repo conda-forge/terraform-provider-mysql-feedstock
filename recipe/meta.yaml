@@ -29,7 +29,8 @@ requirements:
     - {{ compiler('go') }} >=1.11.3
     - git
   run:
-    - terraform >=0.10
+    - terraform >=0.10  # [unix]
+    - terraform >=0.11.9  # [win]
 
 test:
   requires:

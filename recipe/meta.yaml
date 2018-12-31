@@ -26,9 +26,7 @@ build:
 
 requirements:
   build:
-    - {{ compiler('cgo') }}      # [linux]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('go') }} >=1.11.3
     - git
   run:
     - terraform >=0.10

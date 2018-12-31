@@ -13,7 +13,7 @@ package:
 
 source:
   - folder: {{ pkg_src }}
-    url: url: https://{{ goname }}/archive/v{{ version }}.tar.gz
+    url: https://{{ goname }}/archive/v{{ version }}.tar.gz
     sha256: 548658e2912cb8396b23dc37ebab07e342883ff6e23e5e744cdbd8613b874d20
 
 build:
@@ -26,10 +26,9 @@ build:
 requirements:
   build:
     - {{ compiler('go') }} >=1.11.3
-    - git
   run:
     - terraform >=0.10  # [unix]
-    - terraform >=0.11.9  # [win]
+    - terraform >=0.11.11  # [win]
 
 test:
   requires:

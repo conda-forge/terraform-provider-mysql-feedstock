@@ -1,6 +1,6 @@
 {% set provider = "MySQL" %}
 {% set goname = "github.com/terraform-providers/terraform-provider-"+provider.lower() %}
-{% set version = "1.5.0" %}
+{% set version = "1.5.1" %}
 
 {% set name = goname.split('/')[-1] %}
 {% set pkg_src = ('src/'+goname).replace("/",os.sep) %}
@@ -14,10 +14,10 @@ package:
 source:
   - folder: {{ pkg_src }}
     url: https://{{ goname }}/archive/v{{ version }}.tar.gz
-    sha256: 2741fb65324b3ba3a96837e360eb580a1a92b9d0a78031fa6db27ee5f79e50db
+    sha256: 31429e21d975bd5f09584963573d4a9dcf1682dd7815233b62ac89610c87ed41
 
 build:
-  number: 1000
+  number: 0
   script:
     - pushd {{ pkg_src }}
     - go build -v -o $GOBIN/{{ x4_plugin }} .  # [unix]

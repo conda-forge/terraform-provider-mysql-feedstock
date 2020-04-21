@@ -1,6 +1,6 @@
 {% set provider = "MySQL" %}
 {% set goname = "github.com/terraform-providers/terraform-provider-"+provider.lower() %}
-{% set version = "1.8.0" %}
+{% set version = "1.9.0" %}
 
 {% set name = goname.split('/')[-1] %}
 
@@ -12,7 +12,7 @@ package:
 
 source:
   url: https://{{ goname }}/archive/v{{ version }}.tar.gz
-  sha256: f333e4a9a8475cb8a8c969ef4780b95401f805ea3e04d88324173545270d1bbe
+  sha256: dd6e1f123064ddacfb58da3205ce1f438078658e31cd3c904eddd83f0e9e39e3
 
 build:
   number: 0
